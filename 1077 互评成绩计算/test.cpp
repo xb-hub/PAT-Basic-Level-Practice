@@ -6,7 +6,6 @@ int main() {
     cin >> n >> m;
     int temp;
     int result;
-    vector<int> v;
     for (int i = 0; i < n; i++) {
         int g1 = 0, g2 = 0, count = 0, max = -1, min = m + 1;
         cin >> g1;
