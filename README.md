@@ -22,4 +22,3 @@ linux和windows在命令行模式下输入命令:
 8. 输出使用cout速度慢于printf，有些题目使用cout会运行超时，而printf不会。例如1015-德才论
 9. 输出结果四舍五入解决办法:例如1077-互评成绩计算：result = (g1 + g2) * 1.0 / 2 + 0.5;
 10. string字符串输入不能带有空格,读取输入的带有空格的字符串:getline(cin, s);例:读取一行字符串:1093 字符串A+B
-11. string字符串与int互相转化，参考网址:https://www.cnblogs.com/smile233/p/8379802.html
