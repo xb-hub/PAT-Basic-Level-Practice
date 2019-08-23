@@ -10,36 +10,56 @@ int main() {
     string s;
     cin >> n;
     getchar();
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) 
+    {
+        int result = 0;
         getline(cin, s);
         int len = s.length();
-        if (s[0] >= '0' && s[0] <= '9') {
+        if (s[0] >= '0' && s[0] <= '9') 
+        {
             int num = atoi(s.c_str());
             int x = num / 13;
-            if (x) cout << b[x] << " ";
             int y = num % 13;
-            if (y || num == 0) cout << a[y] << endl;
-        } else if (s[0] >= 'a' && s[0] <= 'z') {
-            int res = 0;
+            // if(x)
+            // {
+            //     if(y)
+            //     {
+            //         cout << b[x] << " ";
+            //         cout << a[y] << endl;
+            //     }
+            //     else    cout << b[x] << endl;
+            // }
+            // else
+            // {
+            //     cout << a[y] << endl;
+            // }
+            if(x)   cout << b[x];
+            if(!y && num != 0)  cout << endl;
+            if(x && y)  cout << " ";
+            if(y || num == 0)   cout << a[y] << endl; 
+        } 
+        else 
+        {
+            
             string s1 = s.substr(0, 3), s2;
-            if (len > 4) {
-                s2 = s.substr(4, 3);
-                for (int i = 0; i < 13; i++) {
-                    if (s1 == b[i]) res += (i * 13);
-                    if (s2 == a[i]) res += i;
+            if(len > 4) s2 = s.substr(4, 3);
+            if(!s2.empty())
+            {
+                for(int i = 0; i < 13; i++)
+                {
+                    if(s1 == b[i])  result += i * 13;
+                    if(s2 == a[i])   result += i;
                 }
-                cout << res << endl;
-            } else
-                for (int i = 0; i < 13; i++) {
-                    if (s1 == a[i]) {
-                        cout << i << endl;
-                        break;
-                    }
-                    if (s1 == b[i]) {
-                        cout << i * 13 << endl;
-                        break;
-                    }
+            }
+            else
+            {
+                for(int i = 0; i < 13; i++)
+                {
+                    if(s1 == b[i])  result += i * 13;
+                    if(s1 == a[i])  result += i;
                 }
+            }
+            cout << result << endl;
         }
     }
 }
