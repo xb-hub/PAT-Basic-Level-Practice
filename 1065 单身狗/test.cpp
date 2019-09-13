@@ -1,4 +1,5 @@
 #include <iostream>
+#include <set>
 #include <map>
 #include <vector>
 using namespace std;
@@ -7,48 +8,35 @@ int main()
 {
     int n;
     cin >> n;
-    vector<int> mate(100000, -1);
-    int id;
+    map<int, int> mate;
+    int id_m, id_f;
     for(int i = 0; i < n; i++)
     {
-        cin >> id;
-        cin >> mate[id];
+        cin >> id_m >> id_f;
+        mate[id_m] = id_f;
+        mate[id_f] = id_m;
     }
-    // cout << mate["11111"] << " " << mate["33333"] << " " << mate["55555"] << endl;
     int m;
     cin >> m;
+    vector<bool> exist(100001, false);
     vector<int> ss(m);
-    vector<int> result(m);
+    set<int> result;
     for(int i = 0; i < m; i++)
     {
         cin >> ss[i];
+        exist[ss[i]] = true;
     }
-    // for(int i = 0; i < m; i++)
-    // {
-    //     cout << ss[i] << " ";
-    // }
-    int count = 0;
-    for(int i = 0; i < ss.size() - 1; i++)
+    for(int i = 0; i < m; i++)
     {
-        bool flag = false;
-        for(int j = 0; j < ss.size() - 1; j++)
+        if(!exist[mate[ss[i]]])
         {
-            if(ss[j] == mate[ss[i]])
-            {
-                flag = true;
-                break;
-            }
-        }
-        if(!flag)
-        {
-            count++;
-            result.push_back(ss[i]);
+            result.insert(ss[i]);
         }
     }
-    cout << count << endl;
-    for(int i = 0; i < result.size() - 2; i++)
+    printf("%d\n", result.size());
+    for(set<int>::iterator it = result.begin(); it != result.end(); it++)
     {
-        cout << result[i] << " ";
+        if (it != result.begin()) printf(" ");
+        printf("%05d", *it);
     }
-    cout << result[result.size() - 1];
 }
