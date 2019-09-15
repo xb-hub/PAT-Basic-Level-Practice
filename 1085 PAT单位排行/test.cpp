@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <vector>
 #include <algorithm>
 using namespace std;
 
@@ -10,9 +11,10 @@ struct Student
     string school;
 } stu[100001];
 
-struct Res
+struct Rank
 {
     string school;
+    int sum;
     int num;
 };
 
@@ -22,13 +24,24 @@ bool cmp(Student s1, Student s2)
     return s1.school < s2.school;
 }
 
+bool res_cmp(Rank a, Rank b)
+{
+    if (a.sum != b.sum)
+        return a.sum > b.sum;
+    else if (a.num != b.num)
+        return a.num < b.num;
+    else
+        return a.school < b.school;
+}
+
 int main()
 {
-    int n, count, kind = 0, i = 1;
+    int n, count, kind = 0, grade = 1, temp = 1;
     double sum;
     cin >> n;
-    map<int, Res> result;
-    Res res;
+    // map<int, Rank> result;
+    vector<Rank> result;
+    Rank rank;
     for(int i = 0; i < n; i++)
     {
         cin >> stu[i].id >> stu[i].score >> stu[i].school;
@@ -57,14 +70,15 @@ int main()
             i++;
         }
         sum += stu[i].score;
-        res.num = count + 1;
-        res.school = stu[i].school;
-        result[sum] = res;
+        result.push_back({stu[i].school, sum, count + 1});
         kind++;
     }
+    sort(result.begin(), result.end(), res_cmp);
     cout << kind << endl;
-    for(map<int, Res>::iterator it = result.begin(); it != result.end(); it++)
+    for(int i = 0; i < result.size(); i++)
     {
-        cout << i << " " << it->second.school << " " << " " << it->first << " " << it->second.num << endl;
+        cout << temp << " " << result[i].school << " " << result[i].sum << " " << result[i].num << endl;
+        grade++;
+        if(result[i].sum != result[i + 1].sum)    temp = grade;
     }
 }

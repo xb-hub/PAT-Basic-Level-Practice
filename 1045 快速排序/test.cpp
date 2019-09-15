@@ -1,34 +1,42 @@
-#include<iostream>
+#include <iostream>
+#include <algorithm>
 #include <vector>
-#define MaxSize 100000
 using namespace std;
 
 int main()
 {
-    int n, a[MaxSize], num = 0, left, right;
-    vector<int> v;
+    int n, count = 0, left, right;
     cin >> n;
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
+    vector<int> v(n), a(n), result;
+    int left_max = 0;
     for (int i = 0; i < n; i++)
     {
-        left = 0, right = n - 1;
-        int temp = a[i];
-        // cout << temp << endl;
-        while (a[right] > temp && left < right)
-            right--;
-        // cout << right << " ";
-        while (a[left] < temp && left < right)
-            left++;
-        // cout << left << " " << temp << endl;;
-        if (right == left)
-            v.push_back(temp);
+        scanf("%d", &v[i]);
     }
-    cout << v.size() << endl;
-    for (vector<int>::iterator iter=v.begin();iter!=v.end()-1;iter++)
+    a = v;
+    sort(v.begin(), v.end());
+    for (int i = 0; i < n; i++)
     {
-        cout << *iter << " ";
+        if (v[i] == a[i] && a[i] > left_max)
+        {
+            result.push_back(v[i]);
+            count++;
+        }
+        left_max = max(a[i], left_max);
     }
-    cout << v.back();
-    return 0;
+    cout << result.size() << endl;
+    if (result.size() == 0)
+    {
+        cout << endl;
+        return 0;
+    }
+    else
+    {
+        for (int i = 0; i < result.size(); i++)
+        {
+            if (i != 0)
+                cout << " ";
+            cout << result[i];
+        }
+    }    
 }

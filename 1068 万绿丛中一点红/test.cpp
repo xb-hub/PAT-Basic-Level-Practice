@@ -1,44 +1,62 @@
 #include <iostream>
+#include <map>
+#include <vector>
 using namespace std;
+
+int m, n, tol;
+vector<vector<int>> color;
+int dir[8][2] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
+
+bool judge(int i, int j)
+{
+    for(int k = 0; k < 8; k++)
+    {
+        int tx = i + dir[k][0];
+        int ty = j + dir[k][1];
+        if(tx >= 0 && tx < n && ty >= 0 && ty < m && (abs(color[tx][ty] - color[i][j]) <= tol))
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 int main()
 {
-    int m, n, tol;
+    int count = 0, x = 0, y = 0;
+    map<int, int> cnt;
     cin >> m >> n >> tol;
-    int color[n][m];
+    color.resize(n, vector<int>(m));
     for(int i = 0; i < n; i++)
     {
         for(int j = 0; j < m; j++)
         {
             cin >> color[i][j];
+            cnt[color[i][j]]++;
         }
     }
-    // for(int i = 0; i < n; i++)
-    // {
-    //     for(int j = 0; j < m; j++)
-    //     {
-    //         cout << color[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
-    bool direct[4];
     for(int i = 0; i < n; i++)
     {
-        for(int m = 0; m < 4; m++)
-        {
-            direct[m] = true;
-        }
-        if(i == 0)   direct[0] = false;
-        if(i == n - 1)  direct[1] = false;
         for(int j = 0; j < m; j++)
         {
-            if(j == 0)  direct[2] = false;
-            if(j == m -1)   direct[3] = false;
-            if(!direct[0] && !direct[3])
+            if(judge(i, j) && cnt[color[i][j]] == 1)
             {
-
+                count++;
+                x = i + 1;
+                y = j + 1;
             }
-            else if(!direct[1] && )
         }
+    }
+    if(count == 1)
+    {
+        printf("(%d, %d): %d", y, x, color[x - 1][y - 1]);
+    }
+    else if(count == 0)
+    {
+        cout << "Not Exist";
+    }
+    else
+    {
+        cout << "Not Unique";
     }
 }
