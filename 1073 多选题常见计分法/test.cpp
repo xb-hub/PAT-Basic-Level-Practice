@@ -19,23 +19,23 @@ int main()
 {
     string n_m;
     int n, m;
-    // cin >> n >> m;
-    getline(cin, n_m);
-    int b = 0;
-    for(int i = 0; i < n_m.size(); i++)
-    {
-        if(n_m[i] == ' ')
-        {
-            b = i;
-            break;
-        }
-    }
-    string s_n = n_m.substr(0, b);
-    string s_m;
-    if(n_m[n_m.size() - 1] == ' ')   s_m = n_m.substr(b + 1, n_m.size() - b - 2);
-    else    s_m = n_m.substr(b + 1, n_m.size() - b - 1);
-    n = atoi(s_n.c_str());
-    m = atoi(s_m.c_str());
+    cin >> n >> m;
+    // getline(cin, n_m);
+    // int b = 0;
+    // for(int i = 0; i < n_m.size(); i++)
+    // {
+    //     if(n_m[i] == ' ')
+    //     {
+    //         b = i;
+    //         break;
+    //     }
+    // }
+    // string s_n = n_m.substr(0, b);
+    // string s_m;
+    // if(n_m[n_m.size() - 1] == ' ')   s_m = n_m.substr(b + 1, n_m.size() - b - 2);
+    // else    s_m = n_m.substr(b + 1, n_m.size() - b - 1);
+    // n = atoi(s_n.c_str());
+    // m = atoi(s_m.c_str());
     // cout << n << " " << m;
     vector<vector<int>> error;
     error.resize(m, vector<int>(5));
