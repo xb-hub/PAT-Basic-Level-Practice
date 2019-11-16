@@ -1,34 +1,28 @@
-#include <cstring>
-#include <cstdio>
+#include <iostream>
+#include <vector>
+using namespace std;
+
 int main()
 {
-    char str[90];
-    fgets(str, 90, stdin);
-    char str1[90][90];
-    int r = 0, h = 0;
-    int len = strlen(str);
-    for (int i = 0; i < len; i++)
+    string s;
+    getline(cin, s);
+    vector<string> word;
+    int index = 0;
+    for (int i = 0; i < s.size(); i++)
     {
-        if (str[i] != ' ')
+        if (s[i] == ' ')
         {
-            str1[r][h] = str[i];
-            h++;
-        }
-        else
-        {
-            str1[r][h] = '\0';
-            r++;
-            h = 0;
+            word.push_back(s.substr(index, i - index));
+            index = i + 1;
         }
     }
-    str1[r][h] = '\0';
-    for (int i = r; i >= 0; i--)
+    word.push_back(s.substr(index, s.size() - index));
+    bool flag = false;
+    for (vector<string>::reverse_iterator it = word.rbegin(); it != word.rend(); it++)
     {
-        printf("%s", str1[i]);
-        if (i > 0)
-        {
-            printf(" ");
-        }
+        if (flag)
+            cout << " ";
+        cout << *it;
+        flag = true;
     }
-    return 0;
 }
